@@ -916,71 +916,50 @@
 
 <script>
 
+
 const form = document.getElementById("registerForm");
 
-const nameInput = document.getElementById("t_name");
+const nameInput = document.getElementById("name");
+const rollInput = document.getElementById("roll");
+const semesterInput = document.getElementById("semester");
+const departmentInput = document.getElementById("department");
 
-const emailInput = document.getElementById("email");
+const nameError = document.getElementById("nameError");
+const rollError = document.getElementById("rollError");
+const semesterError = document.getElementById("semesterError");
+const departmentError = document.getElementById("departmentError");
 
-const departmentInput =
-    document.getElementById("department");
+const submitBtn = document.getElementById("submitBtn");
 
-const nameError =
-    document.getElementById("nameError");
-
-const emailError =
-    document.getElementById("emailError");
-
-const departmentError =
-    document.getElementById("departmentError");
-
-const submitBtn =
-    document.getElementById("submitBtn");
-
-
-/* =========================
-   Remove Error
-========================= */
 
 function clearError(input, errorElement) {
 
     input.classList.remove("error-input");
-
     errorElement.textContent = "";
 
 }
 
 
-/* =========================
-   Show Error
-========================= */
-
 function setError(input, errorElement, message) {
 
     input.classList.add("error-input");
-
     errorElement.textContent = message;
 
 }
 
-
-/* =========================
-   Form Validation
-========================= */
 
 form.addEventListener("submit", function(event) {
 
     let valid = true;
 
 
-    /* Teacher Name */
-
+    // Student Name
     if (nameInput.value.trim() === "") {
 
         setError(
             nameInput,
             nameError,
-            "Please enter teacher name."
+            "Please enter student name."
         );
 
         valid = false;
@@ -995,26 +974,13 @@ form.addEventListener("submit", function(event) {
     }
 
 
-    /* Email */
-
-    if (emailInput.value.trim() === "") {
-
-        setError(
-            emailInput,
-            emailError,
-            "Please enter email address."
-        );
-
-        valid = false;
-
-    } else if (
-        !emailInput.value.includes("@")
-    ) {
+    // Roll Number
+    if (rollInput.value.trim() === "") {
 
         setError(
-            emailInput,
-            emailError,
-            "Please enter a valid email address."
+            rollInput,
+            rollError,
+            "Please enter student roll number."
         );
 
         valid = false;
@@ -1022,15 +988,35 @@ form.addEventListener("submit", function(event) {
     } else {
 
         clearError(
-            emailInput,
-            emailError
+            rollInput,
+            rollError
         );
 
     }
 
 
-    /* Department */
+    // Semester
+    if (semesterInput.value === "") {
 
+        setError(
+            semesterInput,
+            semesterError,
+            "Please select a semester."
+        );
+
+        valid = false;
+
+    } else {
+
+        clearError(
+            semesterInput,
+            semesterError
+        );
+
+    }
+
+
+    // Department
     if (departmentInput.value === "") {
 
         setError(
@@ -1060,47 +1046,45 @@ form.addEventListener("submit", function(event) {
 });
 
 
-/* =========================
-   Clear Errors While Typing
-========================= */
+nameInput.addEventListener("input", function() {
 
-nameInput.addEventListener(
-    "input",
-    function() {
+    clearError(
+        nameInput,
+        nameError
+    );
 
-        clearError(
-            nameInput,
-            nameError
-        );
-
-    }
-);
+});
 
 
-emailInput.addEventListener(
-    "input",
-    function() {
+rollInput.addEventListener("input", function() {
 
-        clearError(
-            emailInput,
-            emailError
-        );
+    clearError(
+        rollInput,
+        rollError
+    );
 
-    }
-);
+});
 
 
-departmentInput.addEventListener(
-    "change",
-    function() {
+semesterInput.addEventListener("change", function() {
 
-        clearError(
-            departmentInput,
-            departmentError
-        );
+    clearError(
+        semesterInput,
+        semesterError
+    );
 
-    }
-);
+});
+
+
+departmentInput.addEventListener("change", function() {
+
+    clearError(
+        departmentInput,
+        departmentError
+    );
+
+});
+
 
 </script>
 
