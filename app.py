@@ -32,7 +32,7 @@ def create_tables():
 
     # Teachers table
     cur.execute("""
-        CREATE TABLE IF NOT EXIST  teachers (
+        CREATE TABLE IF NOT EXISTS  teachers (
             id SERIAL PRIMARY KEY,
             name VARCHAR(100) NOT NULL,
             email VARCHAR(100) NOT NULL UNIQUE,
@@ -42,7 +42,7 @@ def create_tables():
 
     # Students table
     cur.execute("""
-        CREATE TABLE IF NOT EXIST students (
+        CREATE TABLE IF NOT EXISTS students (
             id SERIAL PRIMARY KEY,
             name VARCHAR(100) NOT NULL,
             roll VARCHAR(50) NOT NULL UNIQUE,
@@ -53,7 +53,7 @@ def create_tables():
 
     # Attendance table
     cur.execute("""
-        CREATE TABLE IF NOT EXIST  attendance (
+        CREATE TABLE IF NOT EXISTS  attendance (
             id SERIAL PRIMARY KEY,
             student_id INTEGER REFERENCES students(id) ON DELETE CASCADE,
             roll VARCHAR(50) NOT NULL,
