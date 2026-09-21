@@ -19,13 +19,7 @@ app.secret_key = "any-random-string-here"
 
 # PostgreSQL Database Connection
 def get_db_connection():
-    conn = psycopg2.connect(
-        host="localhost",
-        port=5432,
-        database="Attendance",
-        user="postgres",
-        password="post"
-    )
+    conn = psycopg2.connect(os.environ["DATABASE_URL"])
     return conn
 
 
