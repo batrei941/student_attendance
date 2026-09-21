@@ -1,4 +1,3 @@
-#postgresql://attendance_db_7yky_user:zstMjKS7NsImWk4b8AsondJg97bbv2au@dpg-daoeacrm8hqs73ebm2lg-a/attendance_db_7yky
 import os
 import psycopg2
 import openpyxl
@@ -22,6 +21,53 @@ app.secret_key = "any-random-string-here"
 def get_db_connection():
     conn = psycopg2.connect(os.environ["DATABASE_URL"])
     return conn
+
+
+# Create Database Tables
+def create_tables():
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    # Teachers table
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS teachers (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(100) NOT NULL,
+            email VARCHAR(100) NOT NULL UNIQUE,
+            department VARCHAR(100) NOT NULL
+        )
+    """)
+
+    # Students table
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS students (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(100) NOT NULL,
+            roll VARCHAR(50) NOT NULL UNIQUE,
+            semester INTEGER NOT NULL,
+            department VARCHAR(100) NOT NULL
+        )
+    """)
+
+    # Attendance table
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS attendance (
+            id SERIAL PRIMARY KEY,
+            student_id INTEGER REFERENCES students(id) ON DELETE CASCADE,
+            roll VARCHAR(50) NOT NULL,
+            date DATE NOT NULL,
+            status VARCHAR(20) NOT NULL
+        )
+    """)
+
+    conn.commit()
+
+    cur.close()
+    conn.close()
+
+
+create_tables()
 
 
 # Home Page
