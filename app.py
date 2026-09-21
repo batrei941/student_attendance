@@ -1,4 +1,4 @@
-#postgresql://attendance_db_7yky_user:zstMjKS7NsImWk4b8AsondJg97bbv2au@dpg-daoeacrm8hqs73ebm2lg-a/attendance_db_7yky
+import os
 import psycopg2
 import openpyxl
 from datetime import date, timedelta
