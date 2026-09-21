@@ -45,7 +45,7 @@ def create_tables():
             id SERIAL PRIMARY KEY,
             name VARCHAR(100) NOT NULL,
             roll VARCHAR(50) NOT NULL UNIQUE,
-            semester INTEGER NOT NULL,
+            semester VARCHAR(50) NOT NULL,
             department VARCHAR(100) NOT NULL
         )
     """)
